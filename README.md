@@ -8,6 +8,8 @@ Built with **Next.js (App Router) + TypeScript**. Generation works with **Claude
 
 ## Features
 
+- **Bilingual (EN/한국어)** — UI language toggle with browser-language auto-detection; the demo docs ship in both English and Korean, so Korean questions retrieve Korean sources and answers cite Korean doc titles
+
 - **Grounded answers with citations** — every answer cites the doc sections it used, shown as source chips under the message
 - **Streaming UI** — tokens render as they arrive, no spinner-then-wall-of-text
 - **Honest refusals** — if the answer isn't in the docs, it says so instead of guessing
@@ -28,6 +30,10 @@ npm run dev                 # open http://localhost:3000
 1. **Ingest** (`scripts/ingest.mjs`): markdown files in `docs/` are split into ~900-character chunks on paragraph boundaries with overlap, embedded with `text-embedding-3-small`, and written to `data/index.json`.
 2. **Retrieve** (`lib/search.ts`): at query time the question is embedded and the top-4 chunks are selected by cosine similarity.
 3. **Generate** (`app/api/chat/route.ts`): the chunks are injected into a system prompt that instructs the model to answer only from context and cite sections as `[1]`, `[2]`. The answer streams back; the first stream line carries the source metadata.
+
+## Korean docs / 한국어 문서
+
+The demo dataset ships in both languages (`docs/*.md` for English, `docs/*.ko.md` for Korean). Both are indexed together by `npm run ingest`; the embedding model matches questions to same-language chunks, and the system prompt makes the model answer in the user's language. After adding or editing docs in either language, re-run `npm run ingest` and redeploy.
 
 ## Customizing for your docs
 

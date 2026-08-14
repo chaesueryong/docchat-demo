@@ -34,6 +34,34 @@ body {
   padding: 24px 0 28px;
 }
 
+.lang-switch {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.lang-btn {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.lang-btn:hover {
+  border-color: var(--accent);
+}
+
+.lang-btn.active {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--panel-2);
+}
+
 .hero .badge {
   display: inline-block;
   font-size: 12px;
